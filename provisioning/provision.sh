@@ -57,7 +57,7 @@ echo "** Install OracleJDK **"
 cd /tmp
 wget -nv --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
 
-mkdir /opt/jdk
+mkdir /opt/jdk || true
 tar -zxf jdk-8u131-linux-x64.tar.gz -C /opt/jdk
 rm jdk-8u131-linux-x64.tar.gz
 update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_131/bin/java 100
@@ -77,7 +77,7 @@ systemctl start elasticsearch
 # Install Kibana
 echo "** Install Kibana **"
 apt_quiet_install kibana
-mkdir /etc/kibana
+mkdir /etc/kibana || true
 cp $DIR/etc/kibana/kibana.yml /etc/kibana/kibana.yml
 update-rc.d kibana defaults 96 9
 
@@ -85,9 +85,9 @@ echo "** Load Kibana Indexes **"
 $DIR/bin/import_kibana_indexes.sh
 
 echo "** Install Kibana Plugins **"
-/opt/kibana/bin/kibana plugin -i elastic/timelion
-/opt/kibana/bin/kibana plugin -i tagcloud -u https://github.com/stormpython/tagcloud/archive/master.zip
-chown -R kibana:kibana /opt/kibana
+/usr/share/kibana/bin/kibana plugin -i elastic/timelion
+/usr/share/kibana/bin/kibana plugin -i tagcloud -u https://github.com/stormpython/tagcloud/archive/master.zip
+chown -R kibana:kibana /usr/share/kibana
 
 echo "** Start Kibana **"
 systemctl enable kibana
