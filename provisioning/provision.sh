@@ -42,6 +42,7 @@ apt_quiet_install libxslt-dev
 apt_quiet_install libyaml-dev
 apt_quiet_install python-pip
 apt_quiet_install apache2-utils
+apt_quiet_install nginx
 
 
 echo "** Install virtualenv **"
@@ -88,6 +89,10 @@ $DIR/bin/import_kibana_indexes.sh
 echo "** Start Kibana **"
 systemctl enable kibana
 systemctl start kibana
+
+
+cp $DIR/etc/nginx/sites-available/default /etc/nginx/sites-available/default
+systemctl enable nginx
 
 
 echo "** make screeps-stats project **"
