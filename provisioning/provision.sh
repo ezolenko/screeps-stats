@@ -34,7 +34,6 @@ apt-get update
 echo "** Install Development Tools **"
 apt_quiet_install git
 apt_quiet_install nodejs
-apt_quiet_install npm
 apt_quiet_install python-dev
 apt_quiet_install libffi-dev
 apt_quiet_install libssl-dev
