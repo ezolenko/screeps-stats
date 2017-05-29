@@ -85,8 +85,8 @@ echo "** Load Kibana Indexes **"
 $DIR/bin/import_kibana_indexes.sh
 
 echo "** Install Kibana Plugins **"
-/usr/share/kibana/bin/kibana plugin -i elastic/timelion
-/usr/share/kibana/bin/kibana plugin -i tagcloud -u https://github.com/stormpython/tagcloud/archive/master.zip
+/usr/share/kibana/bin/kibana-plugin -i elastic/timelion
+/usr/share/kibana/bin/kibana-plugin -i tagcloud -u https://github.com/stormpython/tagcloud/archive/master.zip
 chown -R kibana:kibana /usr/share/kibana
 
 echo "** Start Kibana **"
