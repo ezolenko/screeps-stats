@@ -42,6 +42,7 @@ apt_quiet_install libxml2-dev
 apt_quiet_install libxslt-dev
 apt_quiet_install libyaml-dev
 apt_quiet_install python-pip
+apt_quiet_install apache2-utils
 
 
 echo "** Install virtualenv **"
@@ -68,9 +69,10 @@ cd $DIR
 # Install ElasticSearch
 echo "** Install ElasticSearch **"
 apt_quiet_install elasticsearch
-cp $DIR/etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
+cp $DIR/etc/elasticsearch/* /etc/elasticsearch
 update-rc.d elasticsearch defaults 95 10
-service elasticsearch start
+systemctl enable elasticsearch
+systemctl start elasticsearch
 
 
 # Install Kibana
@@ -89,7 +91,8 @@ echo "** Install Kibana Plugins **"
 chown -R kibana:kibana /opt/kibana
 
 echo "** Start Kibana **"
-service kibana start
+systemctl enable kibana
+systemctl start kibana
 
 
 echo "** make screeps-stats project **"
