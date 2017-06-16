@@ -13,11 +13,10 @@ def getSettings():
             path = cwd + '/.screeps_settings.yaml'
 
         if not os.path.isfile(path):
-            path = expanduser('~') + '/.screeps_settings.yaml'
+            path = "/home/screepsstats/.screeps_settings.yaml'
 
         if not os.path.isfile(path):
             path = '/vagrant/.screeps_settings.yaml'
-
 
         if not os.path.isfile(path):
             print 'no settings file found'
