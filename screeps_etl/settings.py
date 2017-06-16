@@ -13,7 +13,7 @@ def getSettings():
             path = cwd + '/.screeps_settings.yaml'
 
         if not os.path.isfile(path):
-            path = "/home/screepsstats/.screeps_settings.yaml'
+            path = '/home/screepsstats/.screeps_settings.yaml'
 
         if not os.path.isfile(path):
             path = '/vagrant/.screeps_settings.yaml'
