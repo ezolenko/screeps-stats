@@ -80,7 +80,7 @@ class ScreepsMemoryStats():
                 self.saveOrder(item)
 
     def saveFee(self, order):
-        date_index = time.strftime("%Y_%m")
+        date_index = time.strftime("%Y.%m.%d")
         indexname = 'screeps-market-fees_' + date_index
         if not self.es.exists(index=indexname, doc_type="orders", id=order['id']):
             self.es.index(index=indexname,
@@ -90,7 +90,7 @@ class ScreepsMemoryStats():
                           body=order)
 
     def saveOrder(self, order):
-        date_index = time.strftime("%Y_%m")
+        date_index = time.strftime("%Y.%m.%d")
         indexname = 'screeps-market-orders_' + date_index
 
         if not self.es.exists(index=indexname, doc_type="orders", id=order['id']):
@@ -110,7 +110,7 @@ class ScreepsMemoryStats():
 
         # stats[tick][group][subgroup][data]
         # stats[4233][rooms][W43S94] = {}
-        date_index = time.strftime("%Y_%m")
+        date_index = time.strftime("%Y.%m.%d")
         confirm_queue =[]
         for tick,tick_index in stats['data'].items():
             if int(tick) in self.processed_ticks:
