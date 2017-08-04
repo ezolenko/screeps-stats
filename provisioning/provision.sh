@@ -24,8 +24,8 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee 
 
 # Node repository
 wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-echo 'deb https://deb.nodesource.com/node_6.x wily main' > /etc/apt/sources.list.d/nodesource.list
-echo 'deb-src https://deb.nodesource.com/node_6.x wily main' >> /etc/apt/sources.list.d/nodesource.list
+echo 'deb https://deb.nodesource.com/node_6.x xenial main' > /etc/apt/sources.list.d/nodesource.list
+echo 'deb-src https://deb.nodesource.com/node_6.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
 
 apt-get update
 
@@ -53,16 +53,9 @@ echo "** Install elasticdump **"
 npm install elasticdump -g
 
 
-# Install Oracle Java
-echo "** Install OracleJDK **"
-cd /tmp
-wget -nv --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
-
-mkdir /opt/jdk || true
-tar -zxf jdk-8u131-linux-x64.tar.gz -C /opt/jdk
-rm jdk-8u131-linux-x64.tar.gz
-update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_131/bin/java 100
-update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.8.0_131/bin/javac 100
+# Install OpenJDK Java
+echo "** Install OpenJDK **"
+apt-get install --yes openjdk-8-jre-headless
 cd $DIR
 
 
@@ -84,7 +77,6 @@ update-rc.d kibana defaults 96 9
 
 echo "** Load Kibana Indexes **"
 $DIR/bin/import_kibana_indexes.sh
-
 
 echo "** Start Kibana **"
 systemctl enable kibana
